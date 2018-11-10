@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Psychic Game</title>
+
+
+</head>
+
+<div class="container">
+  <h1>The Psychic Game</h1>
+</div>
+
+<body>
+  <div id="game" class="main-container">
+    <p>Guess what letter I'm thinking of?</p>
+    <p>Wins: 0</p>
+    <p>Losses: 0</p>
+    <p>Guesses left: 9</p>
+    <p>Your guesses so far: </p>
+  </div>
+
+  <script type="text/javascript">
+    // List of possible letters for computer choice, wins, losses, guesses and letters
+    var randomChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var wins = 0;
+    var losses = 0;
+    var guesses = 9;
+    var letters = [];
+
+    // When the user presses a key, it will run the following function...
+    document.onkeyup = function (event) {
+      // Determine which key was pressed
+      var userGuess = event.key.toLowerCase();
+
+      // Sets the computerGuess variable equal to a random choice from the computerChoice array.
+      var computerGuess = randomChoices[Math.floor(Math.random() * randomChoices.length)];
+      // If the user presses any letter in the alphabet.
+      if ((userGuess === "a") || (userGuess === "b") || (userGuess === "c") || (userGuess === "d") || (userGuess === "e") || (userGuess === "f") || (userGuess === "g") || (userGuess === "h") || (userGuess === "i") || (userGuess === "j") || (userGuess === "k") || (userGuess === "l") || (userGuess === "m") || (userGuess === "n") || (userGuess === "o") || (userGuess === "p") || (userGuess === "q") || (userGuess === "r") || (userGuess === "s") || (userGuess === "t") || (userGuess === "u") || (userGuess === "v") || (userGuess === "w") || (userGuess === "x") || (userGuess === "y") || (userGuess === "z")) {
+        // win++
+        if (userGuess === computerGuess) {
+          wins++;
+          guesses--;
+          letters = letters + userGuess;
+
+
+        }
+        if  (userGuess !== computerGuess) {
+          // loss--;
+          guesses--;
+          letters = letters + userGuess;
+
+        }
+
+        //ends game and resets letters
+        if (guesses === 0) {
+          losses++;
+          guesses = guesses + 9;
+          letters = "";
+
+        }
+        var html = "<p>Guess what letter I'm thinking of?</p>" +
+          "<p>Wins: " + wins + "</p>" +
+          "<p>Losses: " + losses + "</p>" +
+          "<p>Guesses left: " + guesses + "</p>" +
+          "<p>Your guesses so far: " + letters + "</p>";
+
+
+
+        // Uppdates the game information on page.
+        document.querySelector("#game").innerHTML = html;
+      }
+
+    };
+  </script>
+
+</body>
+
+</html>
